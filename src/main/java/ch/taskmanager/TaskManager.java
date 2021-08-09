@@ -2,22 +2,21 @@ package ch.taskmanager;
 
 import java.util.*;
 
+/**
+ * TaskManager with default behaviour (1/3)
+ */
 public class TaskManager extends AbstractTaskManager {
 
-    private final int capacityOfProcesses;
-    private List<Process> runningProcesses;
-
     public TaskManager(int capacityOfProcesses) {
-        this.capacityOfProcesses = capacityOfProcesses;
-        this.runningProcesses = new ArrayList<>(capacityOfProcesses);
+        super(capacityOfProcesses);
     }
 
     public void add(Process process) {
-        if (runningProcesses.size() < capacityOfProcesses) {
+        if (runningProcesses.size() < getCapacityOfProcesses()) {
             runningProcesses.add(process);
         } else {
-            runningProcesses.remove(0);
-            runningProcesses.add(process);
+            // we do not accept
+            // possible to notify the consumer, that we don't accept because capacity reached.
         }
     }
 
